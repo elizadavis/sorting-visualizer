@@ -13,11 +13,11 @@ class Visualizer extends Component {
     super(props);
 
     this.state = {
-      array: [],
       cancelExecution: false,
       delay: DEFAULTS.DELAY,
       isSorting: false,
-      phases: [],
+      currentPhase: [],
+      nextPhases: [],
       previousPhases: [],
       size: DEFAULTS.SIZE,
       timeoutID: null,
@@ -25,34 +25,34 @@ class Visualizer extends Component {
   }
 
   componentDidMount() {
-    this.resetArray();
+    this.resetPhase();
   }
 
-  resetArray = () => {
+  resetPhase = () => {
     const { size } = this.state;
-    const array = generateRandomArray(
+    const currentPhase = generateRandomArray(
       size,
       DEFAULTS.INTERVAL_MIN,
       DEFAULTS.INTERVAL_MAX,
     );
 
     clearTimeout(this.state.timeoutID);
-    this.setState({ array, cancelExecution: true });
+    this.setState({ currentPhase, cancelExecution: true });
   };
 
   handleSort = sortType => {
-    const { array, isSorting } = this.state;
+    const { currentPhase, isSorting } = this.state;
 
     if (isSorting) {
       this.onHaltExecution();
-      this.setState({ phases: [] });
+      this.setState({ nextPhases: [] });
     }
 
     const sort = sorts[sortType];
-    const phases = sort(array);
+    const nextPhases = sort([...currentPhase]);
 
     this.setState(
-      { phases, cancelExecution: false, isSorting: true },
+      { nextPhases, cancelExecution: false, isSorting: true },
       this.stepThroughPhases,
     );
   };
@@ -60,21 +60,22 @@ class Visualizer extends Component {
   stepThroughPhases = () => {
     const {
       delay,
-      phases: oldPhases,
-      array: oldArray,
+      currentPhase: oldPhase,
+      nextPhases: oldNextPhases,
       previousPhases: oldPreviousPhases,
     } = this.state;
-    const [array, ...phases] = oldPhases;
-    const previousPhases = [...oldPreviousPhases, oldArray];
+
+    const [currentPhase, ...nextPhases] = oldNextPhases;
+    const previousPhases = [...oldPreviousPhases, oldPhase];
 
     this.setState(
       {
-        array,
-        phases,
+        currentPhase,
+        nextPhases,
         previousPhases,
       },
       () => {
-        if (this.state.phases.length && !this.state.cancelExecution) {
+        if (this.state.nextPhases.length && !this.state.cancelExecution) {
           const timeoutID = setTimeout(this.stepThroughPhases, delay);
           this.setState({ timeoutID });
         }
@@ -83,24 +84,42 @@ class Visualizer extends Component {
   };
 
   onHandleGoForwardOnePhase = () => {
-    const { phases, previousPhases } = this.state;
+    const {
+      currentPhase: oldCurrentPhase,
+      nextPhases: oldNextPhases,
+      previousPhases: oldPreviousPhases,
+    } = this.state;
 
-    if (!phases.length) {
+    if (!oldNextPhases.length) {
       return;
     }
 
-    const [nextPhase, ...rest] = phases;
-    const nextPreviousPhases = [...previousPhases, nextPhase];
+    const [currentPhase, ...nextPhases] = oldNextPhases;
+    const previousPhases = [...oldPreviousPhases, oldCurrentPhase];
 
     this.setState({
-      array: nextPhase,
-      phases: rest,
-      previousPhases: nextPreviousPhases,
+      currentPhase,
+      nextPhases,
+      previousPhases,
     });
   };
 
   onHandleGoBackOnePhase = () => {
-    // @todo
+    const {
+      currentPhase: oldCurrentPhase,
+      previousPhases: oldPreviousPhases,
+      nextPhases: oldNextPhases,
+    } = this.state;
+
+    if (!oldPreviousPhases.length) {
+      return;
+    }
+
+    const currentPhase = oldPreviousPhases.pop();
+    const previousPhases = oldPreviousPhases;
+    const nextPhases = [oldCurrentPhase, ...oldNextPhases];
+
+    this.setState({ currentPhase, previousPhases, nextPhases });
   };
 
   onHandleAfterChange = (attribute, value) => {
@@ -113,7 +132,7 @@ class Visualizer extends Component {
   };
 
   render() {
-    const { array, delay, size } = this.state;
+    const { currentPhase, delay, size } = this.state;
 
     return (
       <div className="visualizer">
@@ -139,7 +158,7 @@ class Visualizer extends Component {
           <button
             type="button"
             className="btn btn-warning sort-button"
-            onClick={this.resetArray}
+            onClick={this.resetPhase}
           >
             Generate New Array
           </button>
@@ -177,7 +196,7 @@ class Visualizer extends Component {
           </button>
         </div>
         <div className="array-container">
-          {array.map((value, index) => (
+          {currentPhase.map((value, index) => (
             <div
               className="array-bar"
               key={index}
