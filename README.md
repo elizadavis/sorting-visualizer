@@ -29,3 +29,7 @@ npm run deploy
 - Step forward and back through sorting
 - Colored bars for sorted
 - hover over bar for tooltip value
+
+### Inspired by
+
+- https://github.com/clementmihailescu/Sorting-Visualizer
