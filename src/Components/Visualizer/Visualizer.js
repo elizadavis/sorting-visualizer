@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import './Visualizer.scss';
 import { GenerateCustomSlider } from '../CustomSlider/CustomSlider';
-import { sorts } from '../../Logic/algorithms';
+import { sorts } from '../../logic/algorithms';
 import { DEFAULTS } from './Visualizer.constants';
-import { generateRandomArray, nameToString } from '../../Logic/helpers';
+import { generateRandomArray, nameToString } from '../../logic/helpers';
 
 const algorithms = _.keys(sorts);
 
@@ -14,12 +14,13 @@ class Visualizer extends Component {
 
     this.state = {
       array: [],
-      phases: [],
       cancelExecution: false,
-      timeoutID: null,
       delay: DEFAULTS.DELAY,
-      size: DEFAULTS.SIZE,
       isSorting: false,
+      phases: [],
+      previousPhases: [],
+      size: DEFAULTS.SIZE,
+      timeoutID: null,
     };
   }
 
@@ -44,6 +45,7 @@ class Visualizer extends Component {
 
     if (isSorting) {
       this.onHaltExecution();
+      this.setState({ phases: [] });
     }
 
     const sort = sorts[sortType];
@@ -56,15 +58,49 @@ class Visualizer extends Component {
   };
 
   stepThroughPhases = () => {
-    const { phases, delay } = this.state;
-    const newArray = phases.shift();
+    const {
+      delay,
+      phases: oldPhases,
+      array: oldArray,
+      previousPhases: oldPreviousPhases,
+    } = this.state;
+    const [array, ...phases] = oldPhases;
+    const previousPhases = [...oldPreviousPhases, oldArray];
 
-    this.setState({ array: newArray, phases }, () => {
-      if (this.state.phases.length && !this.state.cancelExecution) {
-        const timeoutID = setTimeout(this.stepThroughPhases, delay);
-        this.setState({ timeoutID });
-      }
+    this.setState(
+      {
+        array,
+        phases,
+        previousPhases,
+      },
+      () => {
+        if (this.state.phases.length && !this.state.cancelExecution) {
+          const timeoutID = setTimeout(this.stepThroughPhases, delay);
+          this.setState({ timeoutID });
+        }
+      },
+    );
+  };
+
+  onHandleGoForwardOnePhase = () => {
+    const { phases, previousPhases } = this.state;
+
+    if (!phases.length) {
+      return;
+    }
+
+    const [nextPhase, ...rest] = phases;
+    const nextPreviousPhases = [...previousPhases, nextPhase];
+
+    this.setState({
+      array: nextPhase,
+      phases: rest,
+      previousPhases: nextPreviousPhases,
     });
+  };
+
+  onHandleGoBackOnePhase = () => {
+    // @todo
   };
 
   onHandleAfterChange = (attribute, value) => {
@@ -73,7 +109,7 @@ class Visualizer extends Component {
 
   onHaltExecution = () => {
     clearTimeout(this.state.timeoutID);
-    this.setState({ cancelExecution: true, phases: [] });
+    this.setState({ cancelExecution: true });
   };
 
   render() {
@@ -94,7 +130,7 @@ class Visualizer extends Component {
             attribute="size"
             handleAfterChange={this.onHandleAfterChange}
             max={100}
-            min={15}
+            min={5}
             text="Select number of columns for next new array"
             value={size}
           />
@@ -106,6 +142,20 @@ class Visualizer extends Component {
             onClick={this.resetArray}
           >
             Generate New Array
+          </button>
+          <button
+            type="button"
+            className="btn btn-dark sort-button"
+            onClick={this.onHandleGoForwardOnePhase}
+          >
+            Go Forward
+          </button>
+          <button
+            type="button"
+            className="btn btn-dark sort-button"
+            onClick={this.onHandleGoBackOnePhase}
+          >
+            Go Back
           </button>
           {_.map(algorithms, (name, index) => {
             return (

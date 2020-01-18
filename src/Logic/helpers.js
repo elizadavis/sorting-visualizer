@@ -6,9 +6,10 @@ export const randomIntFromInterval = (min, max) => {
 
 export const generateRandomArray = (size, min, max) => {
   const array = [];
-  for (let i = 0; i < size; i++) {
+
+  _.times(size, () => {
     array.push(randomIntFromInterval(min, max));
-  }
+  });
 
   return array;
 };
@@ -23,4 +24,10 @@ export const nameToString = name => {
     .split('_')
     .join(' ');
   return str;
+};
+
+export const swap = (indexA, indexB, array) => {
+  let temp = array[indexA];
+  array[indexA] = array[indexB];
+  array[indexB] = temp;
 };
