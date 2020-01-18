@@ -27,6 +27,14 @@ export const nameToString = name => {
 };
 
 export const swap = (indexA, indexB, array) => {
+  if (typeof indexA !== 'number' || typeof indexB !== 'number') {
+    throw new Error('argument indexA or indexB is not a number');
+  }
+
+  if (!Array.isArray(array)) {
+    throw new Error('argument array is not an array');
+  }
+
   let temp = array[indexA];
   array[indexA] = array[indexB];
   array[indexB] = temp;
