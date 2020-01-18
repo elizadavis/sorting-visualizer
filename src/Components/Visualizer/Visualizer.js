@@ -4,7 +4,11 @@ import './Visualizer.scss';
 import { GenerateCustomSlider } from '../CustomSlider/CustomSlider';
 import { sorts } from '../../logic/algorithms';
 import { DEFAULTS } from './Visualizer.constants';
-import { generateRandomArray, nameToString } from '../../logic/helpers';
+import {
+  isAlreadySorted,
+  generateRandomArray,
+  nameToString,
+} from '../../logic/helpers';
 
 const algorithms = _.keys(sorts);
 
@@ -46,6 +50,10 @@ class Visualizer extends Component {
     if (isSorting) {
       this.onHaltExecution();
       this.setState({ nextPhases: [] });
+    }
+
+    if (isAlreadySorted(currentPhase)) {
+      return;
     }
 
     const sort = sorts[sortType];

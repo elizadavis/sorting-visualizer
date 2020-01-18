@@ -14,8 +14,10 @@ export const generateRandomArray = (size, min, max) => {
   return array;
 };
 
-export const arraysAreEqual = (arrayOne, arrayTwo) => {
-  return _.isEqual(arrayOne, arrayTwo);
+export const isAlreadySorted = array => {
+  const sortedArray = _.sortBy([...array]);
+  const isSorted = _.isEqual(array, sortedArray);
+  return isSorted;
 };
 
 export const nameToString = name => {
