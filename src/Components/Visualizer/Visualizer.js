@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import './Visualizer.scss';
 import { GenerateCustomSlider } from '../CustomSlider/CustomSlider';
-import { sorts } from '../../logic/algorithms';
+import { sorts } from '../../Logic/sorts';
 import { DEFAULTS } from './Visualizer.constants';
 import {
   isAlreadySorted,
   generateRandomArray,
   nameToString,
-} from '../../logic/helpers';
+} from '../../Logic/helpers';
 
 const algorithms = _.keys(sorts);
 
@@ -23,16 +23,17 @@ class Visualizer extends Component {
       currentPhase: [],
       nextPhases: [],
       previousPhases: [],
+      originalPhase: [],
       size: DEFAULTS.SIZE,
       timeoutID: null,
     };
   }
 
   componentDidMount() {
-    this.resetPhase();
+    this.generateNewPhase();
   }
 
-  resetPhase = () => {
+  generateNewPhase = () => {
     const { size } = this.state;
     const currentPhase = generateRandomArray(
       size,
@@ -44,8 +45,19 @@ class Visualizer extends Component {
     this.setState({ currentPhase, cancelExecution: true });
   };
 
+  resetPhase = () => {
+    const { originalPhase } = this.state;
+    this.setState({
+      currentPhase: originalPhase,
+      previousPhases: [],
+      nextPhases: [],
+    });
+  };
+
   handleSort = sortType => {
     const { currentPhase, isSorting } = this.state;
+
+    const originalPhase = currentPhase;
 
     if (isSorting) {
       this.onHaltExecution();
@@ -60,7 +72,7 @@ class Visualizer extends Component {
     const nextPhases = sort([...currentPhase]);
 
     this.setState(
-      { nextPhases, cancelExecution: false, isSorting: true },
+      { nextPhases, originalPhase, cancelExecution: false, isSorting: true },
       this.stepThroughPhases,
     );
   };
@@ -142,6 +154,8 @@ class Visualizer extends Component {
   render() {
     const { currentPhase, delay, size } = this.state;
 
+    window.state = this.state;
+
     return (
       <div className="visualizer">
         <div className="sliders">
@@ -166,9 +180,16 @@ class Visualizer extends Component {
           <button
             type="button"
             className="btn btn-warning sort-button"
+            onClick={this.generateNewPhase}
+          >
+            Generate New Values
+          </button>
+          <button
+            type="button"
+            className="btn btn-warning sort-button"
             onClick={this.resetPhase}
           >
-            Generate New Array
+            Reset Values
           </button>
           <button
             type="button"
