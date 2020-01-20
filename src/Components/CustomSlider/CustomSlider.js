@@ -2,13 +2,10 @@ import 'rc-slider/assets/index.css';
 import 'rc-tooltip/assets/bootstrap.css';
 import React from 'react';
 import Tooltip from 'rc-tooltip';
-import { Handle } from 'rc-slider';
-import Slider from 'rc-slider';
+import Slider, { Handle } from 'rc-slider';
 import './CustomSlider.scss';
 
-export const CustomHandle = props => {
-  const { value, dragging, index, ...restProps } = props;
-
+export const CustomHandle = ({ value, dragging, index, ...restProps }) => {
   return (
     <Tooltip
       prefixCls="rc-slider-tooltip"
@@ -22,9 +19,14 @@ export const CustomHandle = props => {
   );
 };
 
-export const CustomSlider = props => {
-  const { value, handleAfterChange, attribute, text, offset, ...rest } = props;
-
+export const CustomSlider = ({
+  value,
+  handleAfterChange,
+  attribute,
+  text,
+  offset,
+  ...rest
+}) => {
   return (
     <div className="custom-slider">
       <p>{text}</p>

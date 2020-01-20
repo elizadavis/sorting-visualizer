@@ -40,7 +40,7 @@ export const swap = (indexA, indexB, array) => {
     throw new Error('argument array is not an array');
   }
 
-  let temp = array[indexA];
+  const temp = array[indexA];
   array[indexA] = array[indexB];
   array[indexB] = temp;
 };
