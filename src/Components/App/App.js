@@ -5,9 +5,9 @@ import SettingSideBar from '../SettingsSideBar/SettingsSideBar';
 
 function App() {
   return (
-    <div className="App">
-      <SettingSideBar id="settings-side-bar">
-        <Visualizer id="visualizer" />
+    <div className="app">
+      <SettingSideBar>
+        <Visualizer />
       </SettingSideBar>
     </div>
   );
