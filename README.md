@@ -16,19 +16,23 @@ npm run deploy
 ## Technologies
 
 - React
+- Redux
 
 ## Notable Technical Features
 
-- Code Splitting
 - Component Generator
 - Sorting Algorithm
 
 ## Future Features
 
-- Move sliders and settings into side bar
-- Step forward and back through sorting
+- [*] Move sliders and settings into side bar
+- [*] Step forward and back through sorting
 - Colored bars for sorted
-- hover over bar for tooltip value
+- Hover over bar for tooltip value
+- More sorts
+- User logging to check what current sort is
+- User logging for which positions/values are swapped
+- Sort Descriptions
 
 ### Inspired by
 
