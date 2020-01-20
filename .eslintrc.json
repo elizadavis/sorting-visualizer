@@ -15,7 +15,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["babel", "react"],
+  "plugins": ["react"],
   "parser": "babel-eslint",
   "rules": {
     "space-before-function-paren": [
@@ -28,6 +28,6 @@
     ],
     "semi": ["error", "always"],
     "react/prop-types": 0,
-    "comma-dangle": ["error", "always"]
+    "comma-dangle": ["error", "always-multiline"]
   }
 }
