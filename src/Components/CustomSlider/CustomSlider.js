@@ -33,7 +33,7 @@ export const CustomSlider = props => {
         {...rest}
         defaultValue={value}
         handle={CustomHandle}
-        onAfterChange={value => handleAfterChange(attribute, value)}
+        onAfterChange={value => handleAfterChange(value)}
       />
     </div>
   );

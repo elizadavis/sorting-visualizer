@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
 import Visualizer from '../Visualizer/Visualizer';
+import SettingSideBar from '../SettingsSideBar/SettingsSideBar';
 
 function App() {
   return (
     <div className="App">
-      <h1>Sorting Visualizer</h1>
-      <Visualizer />
+      <SettingSideBar id="settings-side-bar">
+        <Visualizer id="visualizer" />
+      </SettingSideBar>
     </div>
   );
 }

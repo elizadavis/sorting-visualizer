@@ -10,6 +10,7 @@
   background-color: blue;
   display: inline-block;
   margin: 0 1px;
+  color: white;
 }
 
 .sort-button {
@@ -22,7 +23,11 @@
 }
 
 .visualizer {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+}
+
+#visualizer {
 }

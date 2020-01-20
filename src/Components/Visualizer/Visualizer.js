@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import './Visualizer.scss';
-import { GenerateCustomSlider } from '../CustomSlider/CustomSlider';
 import { sorts } from '../../Logic/sorts';
-import { DEFAULTS } from './Visualizer.constants';
+import { DEFAULTS } from '../../constants';
 import {
   isAlreadySorted,
   generateRandomArray,
   nameToString,
 } from '../../Logic/helpers';
+import { connect } from 'react-redux';
 
 const algorithms = _.keys(sorts);
 
@@ -18,13 +18,11 @@ class Visualizer extends Component {
 
     this.state = {
       cancelExecution: false,
-      delay: DEFAULTS.DELAY,
       isSorting: false,
       currentPhase: [],
       nextPhases: [],
       previousPhases: [],
       originalPhase: [],
-      size: DEFAULTS.SIZE,
       timeoutID: null,
     };
   }
@@ -34,7 +32,7 @@ class Visualizer extends Component {
   }
 
   generateNewPhase = () => {
-    const { size } = this.state;
+    const { size } = this.props;
     const currentPhase = generateRandomArray(
       size,
       DEFAULTS.INTERVAL_MIN,
@@ -79,11 +77,12 @@ class Visualizer extends Component {
 
   stepThroughPhases = () => {
     const {
-      delay,
       currentPhase: oldPhase,
       nextPhases: oldNextPhases,
       previousPhases: oldPreviousPhases,
     } = this.state;
+
+    const delay = this.props;
 
     const [currentPhase, ...nextPhases] = oldNextPhases;
     const previousPhases = [...oldPreviousPhases, oldPhase];
@@ -142,40 +141,20 @@ class Visualizer extends Component {
     this.setState({ currentPhase, previousPhases, nextPhases });
   };
 
-  onHandleAfterChange = (attribute, value) => {
-    this.setState({ [attribute]: value });
-  };
-
   onHaltExecution = () => {
     clearTimeout(this.state.timeoutID);
     this.setState({ cancelExecution: true });
   };
 
   render() {
-    const { currentPhase, delay, size } = this.state;
+    const { currentPhase } = this.state;
+    const { isValueVisible } = this.props;
 
     window.state = this.state;
 
     return (
       <div className="visualizer">
-        <div className="sliders">
-          <GenerateCustomSlider
-            attribute="delay"
-            handleAfterChange={this.onHandleAfterChange}
-            max={1000}
-            min={5}
-            text="Select sorting delay in milliseconds"
-            value={delay}
-          />
-          <GenerateCustomSlider
-            attribute="size"
-            handleAfterChange={this.onHandleAfterChange}
-            max={100}
-            min={5}
-            text="Select number of columns for next new array"
-            value={size}
-          />
-        </div>
+        <h1>Sorting Visualizer</h1>
         <div className="sort-options">
           <button
             type="button"
@@ -233,7 +212,9 @@ class Visualizer extends Component {
                 height: `${value * DEFAULTS.HEIGHT_MULTIPLIER}px`,
                 width: `${DEFAULTS.WIDTH}px`,
               }}
-            ></div>
+            >
+              {isValueVisible && value}
+            </div>
           ))}
         </div>
       </div>
@@ -241,4 +222,14 @@ class Visualizer extends Component {
   }
 }
 
-export default Visualizer;
+const mapStateToProps = state => {
+  const { settings } = state;
+  const { delay, size, isValueVisible } = settings;
+  return {
+    delay,
+    size,
+    isValueVisible,
+  };
+};
+
+export default connect(mapStateToProps)(Visualizer);

@@ -1,8 +1,9 @@
 export const DEFAULTS = {
-  DELAY: 200,
   HEIGHT_MULTIPLIER: 4,
   INTERVAL_MAX: 100,
   INTERVAL_MIN: 5,
-  SIZE: 15,
   WIDTH: 20,
+  SIZE: 15,
+  DELAY: 200,
+  IS_VALUE_VISIBLE: false,
 };
