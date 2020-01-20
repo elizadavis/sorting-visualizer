@@ -23,12 +23,12 @@ export const CustomHandle = props => {
 };
 
 export const CustomSlider = props => {
-  const { value, handleAfterChange, attribute, text, ...rest } = props;
+  const { value, handleAfterChange, attribute, text, offset, ...rest } = props;
 
   return (
     <div className="custom-slider">
       <p>{text}</p>
-      <p>current value: {value}</p>
+      <p>{value}</p>
       <Slider
         {...rest}
         defaultValue={value}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import './Visualizer.scss';
 import { sorts } from '../../Logic/sorts';
@@ -6,13 +6,18 @@ import { DEFAULTS } from '../../constants';
 import {
   isAlreadySorted,
   generateRandomArray,
-  nameToString,
+  normalizeString,
 } from '../../Logic/helpers';
 import { connect } from 'react-redux';
+import {
+  SortingButtons,
+  ArrayContainer,
+  SortingOptions,
+} from './SubComponents/';
 
 const algorithms = _.keys(sorts);
 
-class Visualizer extends Component {
+class Visualizer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -58,7 +63,7 @@ class Visualizer extends Component {
     const originalPhase = currentPhase;
 
     if (isSorting) {
-      this.onHaltExecution();
+      this.onHandleHaltExecution();
       this.setState({ nextPhases: [] });
     }
 
@@ -82,7 +87,7 @@ class Visualizer extends Component {
       previousPhases: oldPreviousPhases,
     } = this.state;
 
-    const delay = this.props;
+    const { delay } = this.props;
 
     const [currentPhase, ...nextPhases] = oldNextPhases;
     const previousPhases = [...oldPreviousPhases, oldPhase];
@@ -141,9 +146,41 @@ class Visualizer extends Component {
     this.setState({ currentPhase, previousPhases, nextPhases });
   };
 
-  onHaltExecution = () => {
+  onHandleHaltExecution = () => {
     clearTimeout(this.state.timeoutID);
     this.setState({ cancelExecution: true });
+  };
+
+  renderOptions = () => {
+    const options = [
+      {
+        text: 'Generate New Values',
+        className: 'btn-warning',
+        onClick: this.generateNewPhase,
+      },
+      {
+        text: 'Reset Values',
+        className: 'btn-warning',
+        onClick: this.resetPhase,
+      },
+      {
+        text: 'Go Forward',
+        className: 'btn-dark',
+        onClick: this.onHandleGoForwardOnePhase,
+      },
+      {
+        text: 'Go Back',
+        className: 'btn-dark',
+        onClick: this.onHandleGoBackOnePhase,
+      },
+      {
+        text: 'Halt Execution',
+        className: 'btn-danger',
+        onClick: this.onHandleHaltExecution,
+      },
+    ];
+
+    return options;
   };
 
   render() {
@@ -155,68 +192,16 @@ class Visualizer extends Component {
     return (
       <div className="visualizer">
         <h1>Sorting Visualizer</h1>
-        <div className="sort-options">
-          <button
-            type="button"
-            className="btn btn-warning sort-button"
-            onClick={this.generateNewPhase}
-          >
-            Generate New Values
-          </button>
-          <button
-            type="button"
-            className="btn btn-warning sort-button"
-            onClick={this.resetPhase}
-          >
-            Reset Values
-          </button>
-          <button
-            type="button"
-            className="btn btn-dark sort-button"
-            onClick={this.onHandleGoForwardOnePhase}
-          >
-            Go Forward
-          </button>
-          <button
-            type="button"
-            className="btn btn-dark sort-button"
-            onClick={this.onHandleGoBackOnePhase}
-          >
-            Go Back
-          </button>
-          {_.map(algorithms, (name, index) => {
-            return (
-              <button
-                key={index}
-                type="button"
-                className="btn btn-success sort-button"
-                onClick={() => this.handleSort(name)}
-              >
-                {nameToString(name)}
-              </button>
-            );
-          })}
-          <button
-            className="btn btn-danger sort-button"
-            onClick={this.onHaltExecution}
-          >
-            Halt Execution
-          </button>
-        </div>
-        <div className="array-container">
-          {currentPhase.map((value, index) => (
-            <div
-              className="array-bar"
-              key={index}
-              style={{
-                height: `${value * DEFAULTS.HEIGHT_MULTIPLIER}px`,
-                width: `${DEFAULTS.WIDTH}px`,
-              }}
-            >
-              {isValueVisible && value}
-            </div>
-          ))}
-        </div>
+        <SortingOptions options={this.renderOptions()} />
+        <SortingButtons
+          algorithms={algorithms}
+          normalizeString={normalizeString}
+          handleSort={this.handleSort}
+        />
+        <ArrayContainer
+          currentPhase={currentPhase}
+          isValueVisible={isValueVisible}
+        />
       </div>
     );
   }
@@ -225,6 +210,7 @@ class Visualizer extends Component {
 const mapStateToProps = state => {
   const { settings } = state;
   const { delay, size, isValueVisible } = settings;
+
   return {
     delay,
     size,

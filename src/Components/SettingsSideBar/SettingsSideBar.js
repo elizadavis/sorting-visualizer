@@ -20,17 +20,18 @@ const SidebarContent = ({
     <GenerateCustomSlider
       attribute="delay"
       handleAfterChange={updateDelay}
-      max={1000}
+      max={600}
       min={5}
-      text="Select sorting delay in milliseconds"
+      text="Sorting delay in milliseconds"
       value={delay}
+      step={5}
     />
     <GenerateCustomSlider
       attribute="size"
       handleAfterChange={updateSize}
       max={100}
       min={5}
-      text="Select number of columns for next new array"
+      text="Number of columns for next array"
       value={size}
     />
     <button onClick={toggleIsValueVisible}>Toggle Values</button>
@@ -96,9 +97,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     updateSize: size => {
+      console.log('update size');
       dispatch({ type: SETTINGS_ACTIONS.UPDATE_SIZE, payload: size });
     },
     updateDelay: delay => {
+      console.log('update delay', delay);
       dispatch({ type: SETTINGS_ACTIONS.UPDATE_DELAY, payload: delay });
     },
     toggleIsValueVisible: () => {

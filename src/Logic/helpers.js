@@ -20,11 +20,14 @@ export const isAlreadySorted = array => {
   return isSorted;
 };
 
-export const nameToString = name => {
-  const str = name
+export const normalizeString = name => {
+  // converts SCREAMING_SNAKE to 'Screaming Snake'
+  let str = name
     .toLowerCase()
     .split('_')
     .join(' ');
+
+  str = str.replace(/\b\w/g, v => v.toUpperCase());
   return str;
 };
 
