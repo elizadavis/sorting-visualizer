@@ -21,7 +21,6 @@ function simulateMergeSort(unsortedArray, changes) {
   // keeps track of specific sub array that merge sort is processing
   // swaps on elements on the fly inside of sub array
   // pushes changes onto changes
-  // simula
   if (unsortedArray.length <= 1) {
     return unsortedArray;
   }
@@ -34,11 +33,10 @@ function simulateMergeSort(unsortedArray, changes) {
     simulateMergeSort(left, changes),
     simulateMergeSort(right, changes),
     changes,
-    unsortedArray.length,
   );
 }
 
-function simulateMergeSortHelper(left, right, changes, maxLength) {
+function simulateMergeSortHelper(left, right, changes) {
   // @todo: refactor while loop
   const index = {
     left: 0,
@@ -58,6 +56,24 @@ function simulateMergeSortHelper(left, right, changes, maxLength) {
       output.push(right[index.right]);
       index.right++;
     }
+  }
+
+  if (left.slice(index.left).length) {
+    const blank = copy.splice(
+      index.copy,
+      copy.length - index.copy,
+      left.slice(index.left),
+    );
+    simulateMergeSort(blank, changes);
+  }
+
+  if (right.slice(index.right).length) {
+    const blank = copy.splice(
+      index.copy,
+      copy.length - index.copy,
+      right.slice(index.right),
+    );
+    simulateMergeSort(blank, changes);
   }
 
   return [...output, ...left.slice(index.left), ...right.slice(index.right)];
@@ -90,17 +106,19 @@ function simulateMergeSortChanges(changes, array) {
 }
 
 function calculateSwap(array, copy, index, changes, indexKey) {
-  const data = {
+  const change = {
     itemToSwap: array[index[indexKey]],
     mostLeftItemToReplace: copy[index.copy],
-    log: `swap ${array[index[indexKey]].value} with ${copy[index.copy].value}`,
+    log: `${indexKey}\nswap ${array[index[indexKey]].value} at local index  ${
+      array[index[indexKey]].index
+    } \nwith ${copy[index.copy].value} at copy index ${index.copy}`,
   };
 
   const swapIndex = _.findIndex(
     copy,
-    item => item.uniqueKey === data.itemToSwap.uniqueKey,
+    item => item.uniqueKey === change.itemToSwap.uniqueKey,
   );
   swap(swapIndex, index.copy, copy);
-  changes.push(data);
+  changes.push(change);
   index.copy++;
 }
