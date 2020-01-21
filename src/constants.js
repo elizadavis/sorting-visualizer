@@ -4,6 +4,6 @@ export const DEFAULTS = {
   INTERVAL_MIN: 5,
   WIDTH: 20,
   SIZE: 15,
-  DELAY: 200,
+  DELAY: 50,
   IS_VALUE_VISIBLE: false,
 };

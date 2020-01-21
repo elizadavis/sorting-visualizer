@@ -62,6 +62,7 @@ class SettingsSideBar extends React.Component {
 
     return (
       <Sidebar
+        className="sidebar"
         sidebar={
           <SidebarContent
             delay={delay}
@@ -97,11 +98,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     updateSize: size => {
-      console.log('update size');
       dispatch({ type: SETTINGS_ACTIONS.UPDATE_SIZE, payload: size });
     },
     updateDelay: delay => {
-      console.log('update delay', delay);
       dispatch({ type: SETTINGS_ACTIONS.UPDATE_DELAY, payload: delay });
     },
     toggleIsValueVisible: () => {

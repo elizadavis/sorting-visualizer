@@ -13,6 +13,7 @@ import {
   SortingButtons,
   ArrayContainer,
   SortingOptions,
+  CustomArrayOptions,
 } from './SubComponents/';
 
 const algorithms = _.keys(sorts);
@@ -29,6 +30,7 @@ class Visualizer extends React.Component {
       previousPhases: [],
       originalPhase: [],
       timeoutID: null,
+      customPhase: '',
     };
   }
 
@@ -183,8 +185,30 @@ class Visualizer extends React.Component {
     return options;
   };
 
+  onHandleChange = e => {
+    this.setState({ customPhase: e.target.value });
+  };
+
+  onHandleSubmit = event => {
+    // allow [2,3,4] and 3,1,3 as valid inputs
+    event.preventDefault();
+    const { customPhase } = this.state;
+
+    let values;
+
+    try {
+      values = JSON.parse(customPhase);
+    } catch (e) {
+      values = customPhase.split(',');
+    }
+
+    if (_.every(values, Number)) {
+      this.setState({ currentPhase: values });
+    }
+  };
+
   render() {
-    const { currentPhase } = this.state;
+    const { currentPhase, customPhase } = this.state;
     const { isValueVisible } = this.props;
 
     window.state = this.state;
@@ -192,6 +216,11 @@ class Visualizer extends React.Component {
     return (
       <div className="visualizer">
         <h1>Sorting Visualizer</h1>
+        <CustomArrayOptions
+          value={customPhase}
+          onChange={this.onHandleChange}
+          onSubmit={this.onHandleSubmit}
+        />
         <SortingOptions options={this.renderOptions()} />
         <SortingButtons
           algorithms={algorithms}
