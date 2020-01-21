@@ -11,6 +11,7 @@ export const mergeSort = unsortedArray => {
   }));
   simulateMergeSort(input, changes);
   const phases = simulateMergeSortChanges(changes, [...input]);
+
   return phases;
 };
 
@@ -33,58 +34,33 @@ function simulateMergeSort(unsortedArray, changes) {
     simulateMergeSort(left, changes),
     simulateMergeSort(right, changes),
     changes,
+    unsortedArray.length,
   );
 }
 
-function simulateMergeSortHelper(left, right, changes) {
+function simulateMergeSortHelper(left, right, changes, maxLength) {
   // @todo: refactor while loop
-  let leftIndex = 0;
-  let rightIndex = 0;
-  let subArrayIndex = 0;
-  let copy = [...left, ...right];
-
+  const index = {
+    left: 0,
+    right: 0,
+    copy: 0,
+  };
+  const copy = [...left, ...right];
   const output = [];
 
-  while (leftIndex < left.length && rightIndex < right.length) {
-    if (left[leftIndex].value < right[rightIndex].value) {
-      const data = {
-        itemToSwap: left[leftIndex],
-        mostLeftItemToReplace: copy[subArrayIndex],
-        log: `swap ${left[leftIndex].value} with ${copy[subArrayIndex].value}`,
-      };
-
-      if (data.itemToSwap.uniqueKey !== data.mostLeftItemToReplace.uniqueKey) {
-        changes.push(data);
-      }
-      output.push(left[leftIndex]);
-      const swapIndex = _.findIndex(
-        copy,
-        item => item.uniqueKey === data.itemToSwap.uniqueKey,
-      );
-
-      swap(swapIndex, subArrayIndex, copy);
-      leftIndex++;
-      subArrayIndex++;
+  while (index.left < left.length && index.right < right.length) {
+    if (left[index.left].value < right[index.right].value) {
+      calculateSwap(left, copy, index, changes, 'left');
+      output.push(left[index.left]);
+      index.left++;
     } else {
-      const data = {
-        itemToSwap: right[rightIndex],
-        mostLeftItemToReplace: copy[subArrayIndex],
-        log: `swap ${right[rightIndex].value} with ${copy[subArrayIndex].value}`,
-      };
-      changes.push(data);
-      output.push(right[rightIndex]);
-      const swapIndex = _.findIndex(
-        copy,
-        item => item.uniqueKey === data.itemToSwap.uniqueKey,
-      );
-
-      swap(swapIndex, subArrayIndex, copy);
-      rightIndex++;
-      subArrayIndex++;
+      calculateSwap(right, copy, index, changes, 'right');
+      output.push(right[index.right]);
+      index.right++;
     }
   }
 
-  return [...output, ...left.slice(leftIndex), ...right.slice(rightIndex)];
+  return [...output, ...left.slice(index.left), ...right.slice(index.right)];
 }
 
 function simulateMergeSortChanges(changes, array) {
@@ -107,9 +83,24 @@ function simulateMergeSortChanges(changes, array) {
     );
 
     swap(availableLeftIndex, replacedIndex, array);
-
     phases.push([..._.map(array, ({ value }) => value)]);
   });
 
   return phases;
+}
+
+function calculateSwap(array, copy, index, changes, indexKey) {
+  const data = {
+    itemToSwap: array[index[indexKey]],
+    mostLeftItemToReplace: copy[index.copy],
+    log: `swap ${array[index[indexKey]].value} with ${copy[index.copy].value}`,
+  };
+
+  const swapIndex = _.findIndex(
+    copy,
+    item => item.uniqueKey === data.itemToSwap.uniqueKey,
+  );
+  swap(swapIndex, index.copy, copy);
+  changes.push(data);
+  index.copy++;
 }
