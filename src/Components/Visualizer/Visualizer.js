@@ -7,6 +7,7 @@ import {
   isAlreadySorted,
   generateRandomArray,
   normalizeString,
+  convertValuesToNumbers,
 } from '../../Logic/helpers';
 import { connect } from 'react-redux';
 import {
@@ -73,8 +74,9 @@ class Visualizer extends React.Component {
       return;
     }
 
+    const convertedPhase = convertValuesToNumbers(currentPhase);
     const sort = sorts[sortType];
-    const nextPhases = sort([...currentPhase]);
+    const nextPhases = sort(convertedPhase);
 
     this.setState(
       { nextPhases, originalPhase, cancelExecution: false, isSorting: true },

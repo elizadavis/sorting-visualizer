@@ -44,3 +44,7 @@ export const swap = (indexA, indexB, array) => {
   array[indexA] = array[indexB];
   array[indexB] = temp;
 };
+
+export const convertValuesToNumbers = values => {
+  return _.map(values, value => Number(value));
+};
