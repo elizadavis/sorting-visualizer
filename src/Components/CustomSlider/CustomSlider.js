@@ -29,8 +29,9 @@ export const CustomSlider = ({
 }) => {
   return (
     <div className="custom-slider">
-      <p>{text}</p>
-      <p>{value}</p>
+      <p>
+        {text} {value}
+      </p>
       <Slider
         {...rest}
         defaultValue={value}

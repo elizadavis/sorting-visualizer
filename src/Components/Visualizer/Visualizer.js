@@ -16,6 +16,7 @@ import {
   SortingOptions,
   CustomArrayOptions,
 } from './SubComponents/';
+import { ALERTS_ACTIONS } from '../../Actions/actions';
 
 const algorithms = _.keys(sorts);
 
@@ -69,6 +70,7 @@ class Visualizer extends React.Component {
 
   handleSort = sortType => {
     const { currentPhase, isSorting } = this.state;
+    const { startSort } = this.props;
 
     const originalPhase = currentPhase;
 
@@ -84,7 +86,9 @@ class Visualizer extends React.Component {
     const convertedPhase = convertValuesToNumbers(currentPhase);
     const sort = sorts[sortType];
     const nextPhases = sort(convertedPhase);
+    const sortName = normalizeString(sortType);
 
+    startSort(sortName);
     this.setState(
       { nextPhases, originalPhase, cancelExecution: false, isSorting: true },
       this.stepThroughPhases,
@@ -267,4 +271,19 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Visualizer);
+const mapDispatchToProps = dispatch => {
+  return {
+    startSort: sortName => {
+      dispatch({
+        type: ALERTS_ACTIONS.ALERTS_SUCCESS,
+        payload: {
+          heading: 'Sorting...',
+          message: `with ${sortName}`,
+          variant: 'primary',
+        },
+      });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Visualizer);

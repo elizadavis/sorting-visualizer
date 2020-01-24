@@ -27,7 +27,7 @@ class SettingsSideBar extends React.Component {
           handleAfterChange={updateDelay}
           max={600}
           min={5}
-          text="Sorting delay in milliseconds"
+          text="Delay in milliseconds:"
           value={delay}
           step={5}
         />
@@ -36,7 +36,7 @@ class SettingsSideBar extends React.Component {
           handleAfterChange={updateSize}
           max={100}
           min={5}
-          text="Number of columns for next array"
+          text="Columns for next Generate New Values:"
           value={size}
         />
         <label>
