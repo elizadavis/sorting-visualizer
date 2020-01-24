@@ -51,7 +51,13 @@ class Visualizer extends React.Component {
     );
 
     clearTimeout(this.state.timeoutID);
-    this.setState({ currentPhase, cancelExecution: true });
+    this.setState({
+      cancelExecution: true,
+      currentPhase,
+      isSorting: false,
+      nextPhases: [],
+      previousPhases: [],
+    });
   };
 
   restorePhase = () => {
@@ -167,7 +173,15 @@ class Visualizer extends React.Component {
   };
 
   renderOptions = () => {
-    const { isSorting, nextPhases, previousPhases, originalPhase } = this.state;
+    const {
+      currentPhase,
+      isSorting,
+      nextPhases,
+      previousPhases,
+      originalPhase,
+    } = this.state;
+
+    const isPhaseSorted = isSorted(currentPhase);
 
     const options = [
       {
@@ -197,7 +211,7 @@ class Visualizer extends React.Component {
         text: 'Halt Execution',
         className: 'btn-danger',
         onClick: this.onHandleHaltExecution,
-        disabled: !isSorting,
+        disabled: !isSorting || isPhaseSorted,
       },
     ];
 
