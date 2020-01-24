@@ -53,8 +53,13 @@ class Visualizer extends React.Component {
     this.setState({ currentPhase, cancelExecution: true });
   };
 
-  resetPhase = () => {
+  restorePhase = () => {
     const { originalPhase } = this.state;
+
+    if (!originalPhase.length) {
+      return;
+    }
+
     this.setState({
       currentPhase: originalPhase,
       previousPhases: [],
@@ -158,6 +163,8 @@ class Visualizer extends React.Component {
   };
 
   renderOptions = () => {
+    const { isSorting, nextPhases, previousPhases, originalPhase } = this.state;
+
     const options = [
       {
         text: 'Generate New Values',
@@ -165,24 +172,28 @@ class Visualizer extends React.Component {
         onClick: this.generateNewPhase,
       },
       {
-        text: 'Reset Values',
+        text: 'Restore Values',
         className: 'btn-warning',
-        onClick: this.resetPhase,
+        onClick: this.restorePhase,
+        disabled: !originalPhase.length,
       },
       {
         text: 'Go Forward',
         className: 'btn-dark',
         onClick: this.onHandleGoForwardOnePhase,
+        disabled: !isSorting && !nextPhases.length,
       },
       {
         text: 'Go Back',
         className: 'btn-dark',
         onClick: this.onHandleGoBackOnePhase,
+        disabled: !isSorting && !previousPhases.length,
       },
       {
         text: 'Halt Execution',
         className: 'btn-danger',
         onClick: this.onHandleHaltExecution,
+        disabled: !isSorting,
       },
     ];
 
