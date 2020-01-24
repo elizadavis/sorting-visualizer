@@ -114,11 +114,13 @@ function calculateSwap(array, copy, index, changes, indexKey) {
     } \nwith ${copy[index.copy].value} at copy index ${index.copy}`,
   };
 
-  const swapIndex = _.findIndex(
-    copy,
-    item => item.uniqueKey === change.itemToSwap.uniqueKey,
-  );
-  swap(swapIndex, index.copy, copy);
-  changes.push(change);
+  if (change.itemToSwap.uniqueKey !== change.mostLeftItemToReplace.uniqueKey) {
+    const swapIndex = _.findIndex(
+      copy,
+      item => item.uniqueKey === change.itemToSwap.uniqueKey,
+    );
+    swap(swapIndex, index.copy, copy);
+    changes.push(change);
+  }
   index.copy++;
 }

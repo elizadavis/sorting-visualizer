@@ -4,7 +4,7 @@ import './Visualizer.scss';
 import { sorts } from '../../Logic/sorts';
 import { DEFAULTS } from '../../constants';
 import {
-  isAlreadySorted,
+  isSorted,
   generateRandomArray,
   normalizeString,
   convertValuesToNumbers,
@@ -33,6 +33,8 @@ class Visualizer extends React.Component {
       timeoutID: null,
       customPhase: '',
     };
+
+    window.vis = this;
   }
 
   componentDidMount() {
@@ -70,7 +72,7 @@ class Visualizer extends React.Component {
       this.setState({ nextPhases: [] });
     }
 
-    if (isAlreadySorted(currentPhase)) {
+    if (isSorted(currentPhase)) {
       return;
     }
 
@@ -213,11 +215,16 @@ class Visualizer extends React.Component {
     const { currentPhase, customPhase } = this.state;
     const { isValueVisible } = this.props;
 
-    window.state = this.state;
+    const isCorrect = isSorted(currentPhase);
 
     return (
       <div className="visualizer">
-        <h1>Sorting Visualizer</h1>
+        <div
+          className={isCorrect ? 'btn-success' : 'btn-danger'}
+          style={{ width: '50px', height: '50px' }}
+        >
+          {isCorrect}
+        </div>
         <CustomArrayOptions
           value={customPhase}
           onChange={this.onHandleChange}

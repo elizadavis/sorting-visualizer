@@ -14,10 +14,10 @@ export const generateRandomArray = (size, min, max) => {
   return array;
 };
 
-export const isAlreadySorted = array => {
+export const isSorted = array => {
   const sortedArray = _.sortBy([...array]);
-  const isSorted = _.isEqual(array, sortedArray);
-  return isSorted;
+  const isPossiblySorted = _.isEqual(array, sortedArray);
+  return isPossiblySorted;
 };
 
 export const normalizeString = name => {

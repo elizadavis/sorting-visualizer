@@ -1,14 +1,14 @@
 import React from 'react';
-import './App.css';
-import Visualizer from '../Visualizer/Visualizer';
-import SettingSideBar from '../SettingsSideBar/SettingsSideBar';
+import './App.scss';
+import { Routes } from './Routes';
+import { Header, Footer } from '../Main';
 
 function App() {
   return (
     <div className="app">
-      <SettingSideBar>
-        <Visualizer />
-      </SettingSideBar>
+      <Header />
+      <Routes />
+      <Footer />
     </div>
   );
 }

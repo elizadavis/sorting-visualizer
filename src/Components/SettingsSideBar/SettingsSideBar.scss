@@ -1,6 +1,9 @@
-.header {
-  padding: 1rem;
-  background-color: purple;
-  display: flex;
-  justify-content: flex-end;
+.sidebar {
+  padding: 3rem;
+  border-right: 1px solid black;
+}
+
+.react-switch {
+  vertical-align: middle;
+  margin-left: 4px;
 }
