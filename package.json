@@ -29,7 +29,8 @@
     "unique-key": "0.0.6"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "docker-compose up",
+    "start:react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
