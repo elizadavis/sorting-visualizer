@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import _ from 'lodash';
-import './SettingsSideBar.scss';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { GenerateCustomSlider } from '../CustomSlider/CustomSlider';

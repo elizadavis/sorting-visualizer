@@ -1,9 +1,6 @@
-import 'rc-slider/assets/index.css';
-import 'rc-tooltip/assets/bootstrap.css';
 import React from 'react';
 import Tooltip from 'rc-tooltip';
 import Slider, { Handle } from 'rc-slider';
-import './CustomSlider.scss';
 
 export const CustomHandle = ({ value, dragging, index, ...restProps }) => {
   return (

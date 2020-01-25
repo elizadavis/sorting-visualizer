@@ -1,0 +1,21 @@
+/*
+	Import node module styles
+*/
+
+@import '~rc-slider/assets/index.css';
+@import '~rc-tooltip/assets/bootstrap.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+/*
+	Import Main and Mobile styles
+*/
+
+@import 'constants';
+@import 'main';
+@import 'mobile';
+
+/*
+	Import Component Styles
+*/
+
+@import './Components/_index.scss';

@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import './Visualizer.scss';
 import { sorts } from '../../Logic/sorts';
 import { DEFAULTS } from '../../constants';
 import {
@@ -76,7 +75,7 @@ class Visualizer extends React.Component {
 
   handleSort = sortType => {
     const { currentPhase, isSorting } = this.state;
-    const { startSort } = this.props;
+    const { alertSortName } = this.props;
 
     const originalPhase = currentPhase;
 
@@ -94,7 +93,7 @@ class Visualizer extends React.Component {
     const nextPhases = sort(convertedPhase);
     const sortName = normalizeString(sortType);
 
-    startSort(sortName);
+    alertSortName(sortName);
     this.setState(
       { nextPhases, originalPhase, cancelExecution: false, isSorting: true },
       this.stepThroughPhases,
@@ -287,7 +286,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    startSort: sortName => {
+    alertSortName: sortName => {
       dispatch({
         type: ALERTS_ACTIONS.ALERTS_SUCCESS,
         payload: {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import './Routes.scss';
 import { MainPage, ContributorsPage } from '../Pages';
 
 export const Routes = () => {

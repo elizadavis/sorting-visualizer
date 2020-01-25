@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './App.scss';
 import { Routes } from './Routes';
 import { Header, Footer } from '../Main';
 import { Alerts } from '../Alerts/Alerts';

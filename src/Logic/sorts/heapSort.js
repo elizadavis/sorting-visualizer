@@ -1,24 +1,24 @@
 import { swap } from '../helpers';
 
-export function heapSort(input) {
+export const heapSort = input => {
   let currentLength = input.length;
   const phases = [];
 
   for (let index = Math.floor(currentLength / 2); index >= 0; index -= 1) {
-    heapify(input, index, currentLength);
+    heapify(input, index, currentLength, phases);
   }
 
   for (let index = currentLength - 1; index > 0; index--) {
     swap(0, index, input);
     phases.push([...input]);
     currentLength--;
-    heapify(input, 0, currentLength);
+    heapify(input, 0, currentLength, phases);
   }
 
   return phases;
-}
+};
 
-function heapify(input, index, length) {
+function heapify(input, index, length, phases) {
   const left = 2 * index + 1;
   const right = 2 * index + 2;
   let max = index;
@@ -33,6 +33,7 @@ function heapify(input, index, length) {
 
   if (max !== index) {
     swap(index, max, input);
-    heapify(input, max, length);
+    phases.push([...input]);
+    heapify(input, max, length, phases);
   }
 }
