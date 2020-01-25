@@ -7,14 +7,15 @@
 - [yarn package manager](https://legacy.yarnpkg.com/lang/en/docs/install/#mac-stable)
 - [docker](https://www.docker.com/products/docker-desktop)
 
-## Set up
+## Set Up
 
 ```
-npm i
 npm start
 ```
 
-## Set up Troubleshooting
+## Set Up Troubleshooting
+
+- nvm version mismatch
 
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
@@ -33,21 +34,27 @@ npm run deploy
 - React
 - Redux
 
-## Notable Technical Features
+## Other Technologies
 
-- Component Generator
-- Sorting Algorithm
+- Docker
+- Netlify with CI/CD and Pull Request Preview
+- Husky pre-commit linting
 
 ## Future Features
 
-- [*] Move sliders and settings into side bar
-- [*] Step forward and back through sorting
+- [x] Move sliders and settings into side bar
+- [x] Step forward and back through sorting
 - Colored bars for sorted
 - Hover over bar for tooltip value
-- More sorts
-- User logging to check what current sort is
-- User logging for which positions/values are swapped
+- Logging to check what current sort type is
+- Logging for which positions/values are swapped
 - Sort Descriptions
+
+## Contributors
+
+- David Ko
+- Jesse Kasumba
+- Lydia Gamache
 
 ### Inspired by
 
