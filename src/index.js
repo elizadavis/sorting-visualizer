@@ -6,14 +6,14 @@ import App from './Components/App/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { store } from './Store/store';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 const Application = (
-  <HashRouter>
+  <BrowserRouter>
     <Provider store={store}>
       <App />
     </Provider>
-  </HashRouter>
+  </BrowserRouter>
 );
 
 ReactDOM.render(Application, document.getElementById('root'));

@@ -10,6 +10,7 @@
 ## Set Up
 
 ```
+npm i
 npm start
 ```
 
