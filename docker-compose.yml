@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  app:
+    container_name: react-app
+    build: ./
+    ports:
+      - '8000:80'
+    labels:
+      NAME: react-app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

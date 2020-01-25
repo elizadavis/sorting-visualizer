@@ -1,6 +1,11 @@
-## Sorting Visualizer
-
 [![Netlify Status](https://api.netlify.com/api/v1/badges/30a3b545-948f-4fb0-80a0-d618dc180430/deploy-status)](https://app.netlify.com/sites/dkjk-sorting-visualizer/deploys)
+
+# Sorting Visualizer
+
+## Pre-Requisites
+
+- [yarn package manager](https://legacy.yarnpkg.com/lang/en/docs/install/#mac-stable)
+- [docker](https://www.docker.com/products/docker-desktop)
 
 ## Set up
 
