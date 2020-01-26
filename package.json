@@ -34,6 +34,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "clean": "rm -rf node_modules && rm package-lock.json",
+    "install:clean": "rm -rf node_modules && npm install",
     "start:docker": "docker-compose up",
     "start:react": "react-scripts start",
     "start:webpack": "webpack-dev-server --config ./webpack.config.js --mode development",

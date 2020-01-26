@@ -10,7 +10,7 @@
 ## Set Up
 
 ```
-npm i
+npm run install:clean
 npm start
 ```
 
@@ -24,10 +24,10 @@ nvm install
 nvm use
 ```
 
-## Deploy
+## Deployment / Build
 
 ```
-npm run deploy
+npm run build:prod
 ```
 
 ## Technologies
@@ -45,11 +45,11 @@ npm run deploy
 
 - [x] Move sliders and settings into side bar
 - [x] Step forward and back through sorting
-- Colored bars for sorted
-- Hover over bar for tooltip value
-- Logging to check what current sort type is
-- Logging for which positions/values are swapped
-- Sort Descriptions
+- [ ] Colored bars for sorted
+- [ ] Hover over bar for tooltip value
+- [ ] Logging to check what current sort type is
+- [ ] Logging for which positions/values are swapped
+- [ ] Sort Descriptions
 
 ## Contributors
 
