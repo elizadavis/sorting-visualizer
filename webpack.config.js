@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 1993;
 
 module.exports = {
   entry: './src/index.js',
@@ -30,19 +30,19 @@ module.exports = {
       Store: path.resolve(__dirname, 'src/Store/'),
     },
   },
-  output: {
-    filename: 'bundle.js',
-    path: path.join(__dirname, 'build'),
-    publicPath: '/',
-  },
   plugins: [
     new HtmlWebpackPlugin({
-      inject: true,
+      // inject: 'head',
       template: path.resolve('./public/index.html'),
       favicon: path.resolve('./public/favicon.ico'),
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
+  output: {
+    filename: 'bundle.js',
+    path: path.join(__dirname, 'build'),
+    publicPath: '/',
+  },
   devServer: {
     contentBase: path.join(__dirname, 'build'),
     compress: true,
