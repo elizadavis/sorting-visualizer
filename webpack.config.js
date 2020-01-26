@@ -32,18 +32,19 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'build'),
     publicPath: '/',
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'public/index.html',
-      favicon: 'public/favicon.ico',
+      inject: true,
+      template: path.resolve('./public/index.html'),
+      favicon: path.resolve('./public/favicon.ico'),
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'build'),
     compress: true,
     port: port,
     hot: true,
