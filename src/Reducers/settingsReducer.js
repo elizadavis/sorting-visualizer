@@ -1,5 +1,5 @@
-import { SETTINGS_ACTIONS } from '../Actions/actions';
-import { DEFAULTS } from '../constants';
+import { SETTINGS_ACTIONS } from 'Actions/actions';
+import { DEFAULTS } from 'Store/constants';
 
 const initialState = {
   size: DEFAULTS.SIZE,
