@@ -1,5 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const port = process.env.PORT || 3000;
 
 module.exports = {
   entry: './src/index.js',
@@ -29,14 +32,22 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, 'dist'),
     publicPath: '/',
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'public/index.html',
+      favicon: 'public/favicon.ico',
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
   devServer: {
-    contentBase: path.join(__dirname, 'build'),
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 8080,
+    port: port,
     hot: true,
+    open: true,
+    historyApiFallback: true,
   },
 };
