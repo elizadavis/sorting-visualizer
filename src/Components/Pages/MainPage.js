@@ -1,6 +1,6 @@
 import React from 'react';
-import Visualizer from '../Visualizer/Visualizer';
-import SettingSideBar from '../SettingsSideBar/SettingsSideBar';
+import SettingSideBar from 'Components/SettingsSideBar/SettingsSideBar';
+import Visualizer from 'Components/Visualizer/Visualizer';
 
 export const MainPage = () => {
   return (

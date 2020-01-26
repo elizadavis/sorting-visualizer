@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Switch from 'react-switch';
+import { SETTINGS_ACTIONS } from 'Actions/actions';
+import { GenerateCustomSlider } from 'Components/CustomSlider/CustomSlider';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCog } from '@fortawesome/free-solid-svg-icons';
-import { GenerateCustomSlider } from '../CustomSlider/CustomSlider';
-import { SETTINGS_ACTIONS } from '../../Actions/actions';
-import Switch from 'react-switch';
 
 class SettingsSideBar extends React.Component {
   render() {

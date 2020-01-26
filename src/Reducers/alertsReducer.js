@@ -1,4 +1,4 @@
-import { ALERTS_ACTIONS } from '../Actions/actions';
+import { ALERTS_ACTIONS } from 'Actions/actions';
 
 const initialState = {
   alertList: [],

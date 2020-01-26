@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { ALERTS_ACTIONS } from 'Actions/actions';
+import { Alerts } from 'Components/Alerts/Alerts';
+import { Header, Footer } from 'Components/Main';
 import { Routes } from './Routes';
-import { Header, Footer } from '../Main';
-import { Alerts } from '../Alerts/Alerts';
-import { ALERTS_ACTIONS } from '../../Actions/actions';
 
 class App extends React.Component {
   componentDidMount() {

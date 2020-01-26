@@ -1,21 +1,21 @@
-import React from 'react';
 import _ from 'lodash';
-import { sorts } from '../../Logic/sorts';
-import { DEFAULTS } from '../../constants';
+import React from 'react';
+import { connect } from 'react-redux';
+import { ALERTS_ACTIONS } from 'Actions/actions';
 import {
+  sorts,
   isSorted,
   generateRandomArray,
   normalizeString,
   convertValuesToNumbers,
-} from '../../Logic/helpers';
-import { connect } from 'react-redux';
+} from 'Logic';
+import { DEFAULTS } from 'Store/constants';
 import {
   SortingButtons,
   ArrayContainer,
   SortingOptions,
   CustomArrayOptions,
-} from './SubComponents/';
-import { ALERTS_ACTIONS } from '../../Actions/actions';
+} from './SubComponents';
 
 const algorithms = _.keys(sorts);
 

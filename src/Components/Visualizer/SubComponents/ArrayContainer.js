@@ -1,5 +1,5 @@
 import React from 'react';
-import { DEFAULTS } from '../../../constants';
+import { DEFAULTS } from 'Store/constants';
 
 export const ArrayContainer = ({ currentPhase, showValues }) => {
   return (
