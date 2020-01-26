@@ -26,7 +26,8 @@
     "react-switch": "^5.0.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "unique-key": "0.0.6"
+    "unique-key": "0.0.6",
+    "webpack": "^4.41.2"
   },
   "scripts": {
     "start": "npm run start:react",
