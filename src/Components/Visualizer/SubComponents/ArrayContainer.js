@@ -1,7 +1,7 @@
 import React from 'react';
 import { DEFAULTS } from '../../../constants';
 
-export const ArrayContainer = ({ currentPhase, isValueVisible }) => {
+export const ArrayContainer = ({ currentPhase, showValues }) => {
   return (
     <div className="array-container">
       {currentPhase.map((value, index) => (
@@ -13,7 +13,7 @@ export const ArrayContainer = ({ currentPhase, isValueVisible }) => {
             width: `${DEFAULTS.WIDTH}px`,
           }}
         >
-          {isValueVisible && value}
+          {showValues && value}
         </div>
       ))}
     </div>

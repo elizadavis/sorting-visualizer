@@ -4,7 +4,7 @@ import { DEFAULTS } from '../constants';
 const initialState = {
   size: DEFAULTS.SIZE,
   delay: DEFAULTS.DELAY,
-  isValueVisible: DEFAULTS.IS_VALUE_VISIBLE,
+  showValues: DEFAULTS.SHOW_VALUES,
 };
 
 export default function reducer(state = initialState, action) {
@@ -19,10 +19,10 @@ export default function reducer(state = initialState, action) {
         ...state,
         delay: action.payload,
       };
-    case SETTINGS_ACTIONS.TOGGLE_IS_VALUE_VISIBLE:
+    case SETTINGS_ACTIONS.TOGGLE_SHOW_VALUES:
       return {
         ...state,
-        isValueVisible: !state.isValueVisible,
+        showValues: !state.showValues,
       };
     default:
       return state;

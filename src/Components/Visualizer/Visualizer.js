@@ -241,7 +241,7 @@ class Visualizer extends React.Component {
 
   render() {
     const { currentPhase, customPhase } = this.state;
-    const { isValueVisible } = this.props;
+    const { showValues } = this.props;
 
     const isCorrect = isSorted(currentPhase);
 
@@ -264,10 +264,7 @@ class Visualizer extends React.Component {
           normalizeString={normalizeString}
           handleSort={this.handleSort}
         />
-        <ArrayContainer
-          currentPhase={currentPhase}
-          isValueVisible={isValueVisible}
-        />
+        <ArrayContainer currentPhase={currentPhase} showValues={showValues} />
       </div>
     );
   }
@@ -275,12 +272,12 @@ class Visualizer extends React.Component {
 
 const mapStateToProps = state => {
   const { settings } = state;
-  const { delay, size, isValueVisible } = settings;
+  const { delay, size, showValues } = settings;
 
   return {
     delay,
     size,
-    isValueVisible,
+    showValues,
   };
 };
 

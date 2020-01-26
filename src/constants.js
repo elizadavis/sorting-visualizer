@@ -5,5 +5,5 @@ export const DEFAULTS = {
   WIDTH: 20,
   SIZE: 15,
   DELAY: 50,
-  IS_VALUE_VISIBLE: false,
+  SHOW_VALUES: false,
 };

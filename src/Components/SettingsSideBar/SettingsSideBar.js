@@ -13,8 +13,8 @@ class SettingsSideBar extends React.Component {
       size,
       updateDelay,
       updateSize,
-      toggleIsValueVisible,
-      isValueVisible,
+      toggleShowValues,
+      showValues,
     } = this.props;
 
     return (
@@ -41,8 +41,8 @@ class SettingsSideBar extends React.Component {
           <span>Toggle Values</span>
           <Switch
             className="react-switch"
-            onChange={toggleIsValueVisible}
-            checked={isValueVisible}
+            onChange={toggleShowValues}
+            checked={showValues}
           />
         </label>
       </div>
@@ -52,11 +52,11 @@ class SettingsSideBar extends React.Component {
 
 const mapStateToProps = state => {
   const { settings } = state;
-  const { delay, size, isValueVisible } = settings;
+  const { delay, size, showValues } = settings;
   return {
     delay,
     size,
-    isValueVisible,
+    showValues,
   };
 };
 
@@ -68,8 +68,8 @@ const mapDispatchToProps = dispatch => {
     updateDelay: delay => {
       dispatch({ type: SETTINGS_ACTIONS.UPDATE_DELAY, payload: delay });
     },
-    toggleIsValueVisible: () => {
-      dispatch({ type: SETTINGS_ACTIONS.TOGGLE_IS_VALUE_VISIBLE });
+    toggleShowValues: () => {
+      dispatch({ type: SETTINGS_ACTIONS.TOGGLE_SHOW_VALUES });
     },
   };
 };
