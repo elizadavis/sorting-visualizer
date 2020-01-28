@@ -1,5 +1,5 @@
 FROM node:13-slim
-LABEL Name="dko-app" Version=1.0.0
+LABEL Name="dkjk-app" Version=1.0.0
 RUN mkdir -p /app
 WORKDIR /app
 COPY . /app

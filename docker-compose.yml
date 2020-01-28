@@ -1,24 +1,8 @@
-# version: '3.7'
-# services:
-#   app:
-#     container_name: react-app
-#     build: ./
-#     ports:
-#       - '8000:80'
-#     labels:
-#       NAME: react-app
-#     networks:
-#       - app-network
-
-# networks:
-#   app-network:
-#     driver: bridge
-
 version: '3.7'
 services:
-  dko-app:
+  dkjk-app:
     image: node:13-slim
-    container_name: dko-app
+    container_name: dkjk-app
     build: .
     ports:
       - 1993:1993
