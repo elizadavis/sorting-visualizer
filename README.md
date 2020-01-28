@@ -4,14 +4,21 @@
 
 ## Pre-Requisites
 
-- [yarn package manager](https://legacy.yarnpkg.com/lang/en/docs/install/#mac-stable)
+- [node](https://treehouse.github.io/installation-guides/mac/node-mac.html)
 - [docker](https://www.docker.com/products/docker-desktop)
+- [yarn](https://legacy.yarnpkg.com/lang/en/docs/install/#mac-stable)
 
 ## Set Up
 
 ```
 npm run install:clean
 npm start
+```
+
+or
+
+```
+docker-compose up
 ```
 
 ## Set Up Troubleshooting
@@ -23,6 +30,10 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 nvm install
 nvm use
 ```
+
+## Localhost
+
+- running at http://localhost:1993/
 
 ## Deployment / Build
 
