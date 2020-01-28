@@ -17,9 +17,11 @@
 version: '3.7'
 services:
   dko-app:
+    image: node:13-slim
     container_name: dko-app
     build: .
     ports:
-      - 8000:8000
+      - 1993:1993
     volumes:
       - ./:/app
+      - /app/node_modules/

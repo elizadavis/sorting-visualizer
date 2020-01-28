@@ -27,12 +27,12 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "unique-key": "0.0.6",
-    "webpack": "^4.41.2",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-manifest-plugin": "^2.2.0"
   },
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --colors --host 0.0.0.0",
     "clean": "rm -rf node_modules && rm package-lock.json",
     "install:clean": "rm -rf node_modules && npm install",
     "start:docker": "if [ ! -d node_modules ]; then npm install; fi && webpack-dev-server -d --watch --public --progress --colors",
