@@ -10,11 +10,12 @@ import {
   convertValuesToNumbers,
 } from 'Logic';
 import { DEFAULTS } from 'Store/constants';
+import { MESSAGES } from 'Messages/AlertMessages';
 import {
   SortingButtons,
   ArrayContainer,
   SortingOptions,
-  CustomArrayOptions,
+  CustomArrayForm,
 } from './SubComponents';
 
 const algorithms = _.keys(sorts);
@@ -225,6 +226,7 @@ class Visualizer extends React.Component {
     // allow [2,3,4] and 3,1,3 as valid inputs
     event.preventDefault();
     const { customPhase } = this.state;
+    const { alertMessage } = this.props;
 
     let values;
 
@@ -234,13 +236,27 @@ class Visualizer extends React.Component {
       values = customPhase.split(',');
     }
 
+    if (typeof values === 'string' || typeof values === 'number') {
+      return alertMessage(MESSAGES.ONE_VALUE);
+    }
+
+    if (_.size(values) > 100) {
+      return alertMessage(MESSAGES.SIZE_OVERFLOW);
+    }
+
     if (_.some(values, value => value > DEFAULTS.INTERVAL_MAX)) {
-      return;
+      return alertMessage(MESSAGES.MAX_OVERFLOW);
     }
 
     if (_.every(values, Number)) {
-      this.setState({ currentPhase: values });
+      return this.setState({ currentPhase: values });
     }
+
+    if (typeof values === 'object') {
+      return alertMessage(MESSAGES.ONLY_NUMBERS);
+    }
+
+    return alertMessage(MESSAGES.DEFAULT);
   };
 
   render() {
@@ -257,7 +273,7 @@ class Visualizer extends React.Component {
         >
           {isCorrect}
         </div>
-        <CustomArrayOptions
+        <CustomArrayForm
           value={customPhase}
           onChange={this.onHandleChange}
           onSubmit={this.onHandleSubmit}
@@ -296,6 +312,9 @@ const mapDispatchToProps = dispatch => {
           variant: 'primary',
         },
       });
+    },
+    alertMessage: message => {
+      dispatch(message);
     },
   };
 };

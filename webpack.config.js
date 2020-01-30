@@ -27,6 +27,7 @@ module.exports = {
       Assets: path.resolve(__dirname, 'src/Assets/'),
       Components: path.resolve(__dirname, 'src/Components/'),
       Logic: path.resolve(__dirname, 'src/Logic/'),
+      Messages: path.resolve(__dirname, 'src/Messages/'),
       Reducers: path.resolve(__dirname, 'src/Reducers/'),
       Store: path.resolve(__dirname, 'src/Store/'),
     },

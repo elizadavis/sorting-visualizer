@@ -6,9 +6,7 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case ALERTS_ACTIONS.ALERTS_SUCCESS:
-      return { ...state, alertList: [...state.alertList, action.payload] };
-    case ALERTS_ACTIONS.ALERTS_FAILURE:
+    case ALERTS_ACTIONS.ALERTS_ADD:
       return { ...state, alertList: [...state.alertList, action.payload] };
     case ALERTS_ACTIONS.ALERTS_RESET:
       return { ...state, alertList: [] };

@@ -1,9 +1,13 @@
 import React from 'react';
 
-export const CustomArrayOptions = ({ value, onChange, onSubmit }) => {
+export const CustomArrayForm = ({ value, onChange, onSubmit }) => {
   return (
-    <form className="p-3" onSubmit={onSubmit}>
+    <form
+      className="form-inline p-3 justify-content-center"
+      onSubmit={onSubmit}
+    >
       <input
+        className="form-control"
         type="text"
         placeholder="Enter a custom array"
         name="text"
