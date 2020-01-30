@@ -234,6 +234,10 @@ class Visualizer extends React.Component {
       values = customPhase.split(',');
     }
 
+    if (_.some(values, value => value > DEFAULTS.INTERVAL_MAX)) {
+      return;
+    }
+
     if (_.every(values, Number)) {
       this.setState({ currentPhase: values });
     }

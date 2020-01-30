@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.1.2",
     "babel-preset-react": "^6.24.1",
     "bootstrap": "^4.4.1",
+    "copy-webpack-plugin": "^5.1.1",
     "g": "^2.0.1",
     "lodash": "^4.17.15",
     "netlify-cli": "^2.30.0",
@@ -32,7 +33,7 @@
     "webpack-manifest-plugin": "^2.2.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --colors --host 0.0.0.0",
+    "start": "webpack-dev-server --colors --host localhost",
     "clean": "rm -rf node_modules && rm package-lock.json",
     "install:clean": "rm -rf node_modules && npm install",
     "start:docker": "if [ ! -d node_modules ]; then npm install; fi && webpack-dev-server -d --watch --public --progress --colors",

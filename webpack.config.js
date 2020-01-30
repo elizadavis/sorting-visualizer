@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const port = process.env.PORT || 1993;
 
@@ -37,6 +38,7 @@ module.exports = {
       favicon: path.resolve('./public/favicon.ico'),
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new CopyPlugin([{ from: 'public' }]),
   ],
   output: {
     filename: 'bundle.js',
