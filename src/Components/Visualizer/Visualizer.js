@@ -237,26 +237,30 @@ class Visualizer extends React.Component {
     }
 
     if (typeof values === 'string' || typeof values === 'number') {
-      return alertMessage(MESSAGES.ONE_VALUE);
+      alertMessage(MESSAGES.ONE_VALUE);
+      return;
     }
 
     if (_.size(values) > 100) {
-      return alertMessage(MESSAGES.SIZE_OVERFLOW);
+      alertMessage(MESSAGES.SIZE_OVERFLOW);
+      return;
     }
 
     if (_.some(values, value => value > DEFAULTS.INTERVAL_MAX)) {
-      return alertMessage(MESSAGES.MAX_OVERFLOW);
+      alertMessage(MESSAGES.MAX_OVERFLOW);
+      return;
     }
 
     if (_.every(values, Number)) {
-      return this.setState({ currentPhase: values });
+      this.setState({ currentPhase: values });
+      return;
     }
 
     if (typeof values === 'object') {
-      return alertMessage(MESSAGES.ONLY_NUMBERS);
+      alertMessage(MESSAGES.ONLY_NUMBERS);
     }
 
-    return alertMessage(MESSAGES.DEFAULT);
+    alertMessage(MESSAGES.DEFAULT);
   };
 
   render() {
@@ -305,7 +309,7 @@ const mapDispatchToProps = dispatch => {
   return {
     alertSortName: sortName => {
       dispatch({
-        type: ALERTS_ACTIONS.ALERTS_SUCCESS,
+        type: ALERTS_ACTIONS.ALERTS_ADD,
         payload: {
           heading: 'Sorting...',
           message: `with ${sortName}`,
