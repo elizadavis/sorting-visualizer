@@ -3,7 +3,6 @@ services:
   dkjk-app:
     image: node:13-slim
     container_name: dkjk-app
-    build: .
     ports:
       - 1993:1993
     volumes:
