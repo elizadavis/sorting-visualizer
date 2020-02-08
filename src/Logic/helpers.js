@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { _ } from 'Utils';
 
 export const randomIntFromInterval = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);

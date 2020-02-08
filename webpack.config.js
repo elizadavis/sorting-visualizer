@@ -30,6 +30,7 @@ module.exports = {
       Messages: path.resolve(__dirname, 'src/Messages/'),
       Reducers: path.resolve(__dirname, 'src/Reducers/'),
       Store: path.resolve(__dirname, 'src/Store/'),
+      Utils: path.resolve(__dirname, 'src/Utils/'),
     },
   },
   plugins: [

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { _ } from 'Utils';
 import uniqueKey from 'unique-key';
 import { swap } from '../helpers';
 

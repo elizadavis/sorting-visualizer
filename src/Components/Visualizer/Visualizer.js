@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { ALERTS_ACTIONS } from 'Actions/actions';
@@ -9,8 +8,9 @@ import {
   normalizeString,
   convertValuesToNumbers,
 } from 'Logic';
-import { DEFAULTS } from 'Store/constants';
 import { MESSAGES } from 'Messages/AlertMessages';
+import { DEFAULTS } from 'Store/constants';
+import { _ } from 'Utils';
 import {
   SortingButtons,
   ArrayContainer,

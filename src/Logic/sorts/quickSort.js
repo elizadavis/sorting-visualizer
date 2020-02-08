@@ -1,4 +1,3 @@
-// import _ from 'lodash';
 import { swap } from '../helpers';
 
 const quickSortHelper = (array, startIndex, endIndex, phases) => {
