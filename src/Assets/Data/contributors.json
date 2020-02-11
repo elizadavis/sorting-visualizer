@@ -1,11 +1,28 @@
 {
   "contributors": [
     {
-      "name": "Me!",
-      "github": "no",
-      "email": "no",
-      "image": "no",
-      "title": "no"
+      "name": "Lydia Gamache",
+      "github": "",
+      "image": "",
+      "title": "UI/UX Designer",
+      "website": "",
+      "about": "I am..."
+    },
+    {
+      "name": "Jesse Kasumba",
+      "github": "https://github.com/juliojesse25",
+      "image": "",
+      "title": "Software Engineer",
+      "website": "",
+      "about": "I am..."
+    },
+    {
+      "name": "David Ko",
+      "github": "https://github.com/davidholyko",
+      "image": "",
+      "title": "Software Engineer",
+      "website": "",
+      "about": "I am..."
     }
   ]
 }
