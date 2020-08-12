@@ -12,6 +12,7 @@ export const SortingOptions = ({ options }) => {
             type="button"
             onClick={onClick}
             disabled={disabled}
+            style={disabled ? { cursor: 'not-allowed' } : null}
           >
             {text}
           </button>
