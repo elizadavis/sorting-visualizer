@@ -11,9 +11,9 @@ const Card = props => {
       </div>
       <div className="card-name"><h4>{name}</h4></div>
       <div className="card-title">{title}</div>
-      <div className="card-github">{github}</div>
+      <div className="card-github"><a href={github} target="_blank" rel="noopener noreferrer">Github</a></div>
       <div className="card-about">{about}</div>
-      <div className="card-website">{website}</div>
+      <div className="card-website"><a href={website} target="_blank" rel="noopener noreferrer">Website</a></div>
     </div>
   );
 };
@@ -23,7 +23,7 @@ export const ContributorsPage = () => {
     <div className="contributors-page">
       <div className="contributors-header">
         <h1 className="mt-2">Meet Our Contributors</h1>
-        <p className="col-5 mx-auto">Thank you for using Sorting Visualizer. It takes a village of three so far and these
+        <p className="mx-auto">Thank you for using Sorting Visualizer. It takes a village of three so far and these
           are our members. If you would like to contact us directly, our information is below. We hope
           to add new features soon.
         </p>
